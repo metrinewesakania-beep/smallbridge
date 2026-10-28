@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17112f">
+  <title>SmallBridge — Small Steps, Real Hope</title>
+  <meta name="description" content="Discover practical ways to find help, learn something new, and make a difference.">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #100d20;
+      color: #f7f4ff;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #302747;
+    }
+
+    .logo { font-size: 1.35rem; font-weight: bold; }
+    .logo span { color: #c5a7ff; }
+
+    .hero {
+      padding: 75px 7% 55px;
+      text-align: center;
+      background: radial-gradient(ellipse at top, #39245e, #100d20 72%);
+    }
+
+    .tag {
+      color: #d5c1ff;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: .75rem;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 8vw, 4.3rem);
+      line-height: 1.1;
+      margin: 18px auto;
+      max-width: 800px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 20px auto;
+      color: #d1cadd;
+    }
+
+    .section { padding: 40px 7%; }
+    .section h2 { font-size: 1.7rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #1d1830;
+      border: 1px solid #3a3050;
+      border-radius: 18px;
+      padding: 23px;
+    }
+
+    .symbol { font-size: 2rem; }
+    .card p { color: #c8c0d8; }
+
+    button {
+      background: #b99aff;
+      color: #1b1230;
+      font-weight: bold;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 17px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover { background: #d0bcff; }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #29203e;
+      border-radius: 12px;
+      color: #f2eaff;
+      min-height: 65px;
+    }
+
+    .note { color: #bcb2cc; font-size: .9rem; }
+
+    footer {
+      border-top: 1px solid #302747;
+      padding: 25px 7%;
+      color: #bcb2cc;
+      text-align: center;
+    }
+
+    :focus-visible {
+      outline: 3px solid #e2d3ff;
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🌉 Small<span>Bridge</span></div>
+    <div>Small steps. Real hope.</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="tag">A LITTLE HELP CAN GO A LONG WAY</div>
+      <h1>Someone needs help.<br>Someone can help.</h1>
+      <p>
+        Life can be difficult sometimes. Discover one practical next step,
+        learn a new skill, or make another person's day a little better.
+      </p>
+      <button onclick="showIdea()">Give me one good thing</button>
+      <div class="result" id="idea" aria-live="polite">
+        Your next small act of kindness starts here.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Where would you like to begin?</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="symbol">💜</div>
+          <h3>I Need Help</h3>
+          <p>Find a safe, practical first step when something feels difficult.</p>
+          <button onclick="choose('help')">Find a next step</button>
+        </article>
+
+        <article class="card">
+          <div class="symbol">🤝</div>
+          <h3>I Can Help</h3>
+          <p>Discover simple ways to support people in your community.</p>
+          <button onclick="choose('give')">Find a way to help</button>
+        </article>
+
+        <article class="card">
+          <div class="symbol">📚</div>
+          <h3>Learn for Free</h3>
+          <p>Take a step toward learning a useful skill with free resources.</p>
+          <button onclick="choose('learn')">Start learning</button>
+        </article>
+      </div>
+
+      <div class="result" id="answer" aria-live="polite">
+        Choose a card to discover your next step.
+      </div>
+      <p class="note">
+        SmallBridge is a starting point, not an emergency service.
+        Don't post passwords, private addresses, or sensitive personal details.
+        If you're in immediate danger, contact a trusted adult or local
+        emergency services.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>SmallBridge</strong> — Small actions. Stronger communities.</p>
+    <p>Built to make kindness practical.</p>
+  </footer>
+
+  <script>
+    const ideas = [
+      "Check on someone you trust and ask how their day is going.",
+      "Share a useful lesson or skill with someone who wants to learn.",
+      "Help with a small task at home without being asked.",
+      "Encourage someone who is learning something new.",
+      "Find a community project where you can volunteer safely.",
+      "Thank someone who has helped you recently."
+    ];
+
+    function showIdea() {
+      const idea = ideas[Math.floor(Math.random() * ideas.length)];
+      document.getElementById("idea").textContent = idea;
+    }
+
+    function choose(type) {
+      const messages = {
+        help: "Start by naming the problem in general terms. Break it into one manageable step, and consider speaking with a trusted person or a qualified local support service.",
+        give: "Choose one safe action: share a useful skill, help with a task, donate an item you no longer need, or volunteer through a trusted community group.",
+        learn: "Pick one skill you want to learn. Search for a free beginner course, set aside 15 minutes, and practise one small lesson today."
+      };
+
+      document.getElementById("answer").textContent = messages[type];
+    }
+  </script>
+</body>
+        </html>
+        
