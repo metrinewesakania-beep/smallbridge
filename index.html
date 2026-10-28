@@ -1,675 +1,326 @@
 
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#100d20">
-  <meta name="description" content="SmallBridge by Megan Oloo connects people with learning, digital skills, public services, and community resources.">
-  <title>SmallBridge | Megan Oloo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SmallBridge by Megan Oloo connects people with learning, digital skills, public services and community resources.">
+<title>SmallBridge | Megan Oloo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4fd;--panel:#fff;--panel2:#efe9fa;--text:#1c1533;--muted:#5d5475;--accent:#6b3fd4;--accent-ink:#fff;
+  --border:#ddd3ee;--mint:#0f7a55;--glow:#d9c8ff;--shadow:0 10px 30px rgba(60,30,120,.10);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#100d20;--panel:#1b1630;--panel2:#271f3f;--text:#f8f5ff;--muted:#c3b9d8;--accent:#c3a5ff;--accent-ink:#1b1230;
+    --border:#3d3254;--mint:#a7f3d0;--glow:#4a3278;--shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#100d20;--panel:#1b1630;--panel2:#271f3f;--text:#f8f5ff;--muted:#c3b9d8;--accent:#c3a5ff;--accent-ink:#1b1230;
+  --border:#3d3254;--mint:#a7f3d0;--glow:#4a3278;--shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+a{color:inherit}
+button,input{font:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:Fraunces,Georgia,"Times New Roman",serif;line-height:1.15;margin:0}
+.wrap{width:min(1120px,92%);margin:auto}
 
-  <style>
-    :root {
-      --bg: #100d20;
-      --panel: #1d1830;
-      --panel2: #28203e;
-      --text: #f8f5ff;
-      --muted: #c8bfd9;
-      --accent: #c3a5ff;
-      --border: #403454;
-      --green: #a7f3d0;
-    }
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
+.brand{font:800 1.35rem Fraunces,Georgia,serif;text-decoration:none;display:flex;gap:8px;align-items:center}
+.brand b{color:var(--accent)}
+nav{display:flex;gap:4px;align-items:center;overflow-x:auto}
+nav a{padding:8px 12px;border-radius:999px;color:var(--muted);text-decoration:none;font-weight:500;font-size:.93rem;white-space:nowrap}
+nav a:hover{background:var(--panel2);color:var(--text)}
+.theme{border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:999px;width:42px;height:42px;cursor:pointer;flex:none}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+/* hero */
+.hero{position:relative;overflow:hidden;padding:72px 0 0;background:radial-gradient(ellipse 80% 70% at 50% 0,var(--glow),transparent 70%)}
+.hero .in{text-align:center;max-width:780px;margin:auto;position:relative;z-index:1}
+h1{font-size:clamp(2.4rem,7.5vw,4.6rem);font-weight:800;letter-spacing:-.02em}
+.hero p.lead{color:var(--muted);font-size:1.12rem;max-width:600px;margin:18px auto 28px}
+.quick{display:flex;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:8px;box-shadow:var(--shadow);max-width:620px;margin:auto}
+.quick input{flex:1;min-width:0;border:0;background:transparent;color:var(--text);padding:12px 14px;border-radius:12px;font-size:1rem}
+.quick input:focus-visible{outline-offset:-2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 18px;border-radius:12px;border:0;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;cursor:pointer;min-height:46px}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--panel2);color:var(--text);border:1px solid var(--border)}
+.founder{margin:26px 0 0;color:var(--muted);font-size:.95rem}
+.founder strong{color:var(--text)}
+.arch{display:block;width:100%;height:auto;max-height:190px;margin-top:34px}
+.arch path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round}
+.arch .deck{stroke:var(--text);stroke-width:4}
+.arch .cable{stroke-width:1.6;opacity:.65}
+.arch .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, Arial, sans-serif;
-      line-height: 1.6;
-    }
+/* sections */
+section{padding:56px 0 8px}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h2{font-size:clamp(1.7rem,4.5vw,2.5rem);font-weight:800}
+.sub{color:var(--muted);margin:8px 0 0;max-width:60ch}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.chip{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:9px 15px;border-radius:999px;cursor:pointer;font-weight:500;min-height:42px}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.count{color:var(--muted);font-size:.92rem;margin:14px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px}
+.card{display:flex;flex-direction:column;gap:8px;padding:20px;background:var(--panel);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);min-width:0}
+.card .top{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.ico{width:48px;height:48px;border-radius:14px;background:var(--panel2);display:grid;place-items:center;font-size:1.5rem}
+.save{border:1px solid var(--border);background:transparent;color:var(--muted);width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:1.1rem}
+.save[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:var(--panel2)}
+.tag{align-self:flex-start;font-size:.8rem;font-weight:700;color:var(--mint)}
+.card h3{font-size:1.2rem}
+.card p{margin:0 0 10px;color:var(--muted);font-size:.96rem}
+.card .btn{margin-top:auto;align-self:stretch}
+.empty{padding:32px;text-align:center;color:var(--muted);background:var(--panel);border:1px dashed var(--border);border-radius:18px}
+[hidden]{display:none!important}
+.note{margin-top:20px;padding:18px 20px;border-left:4px solid var(--accent);background:var(--panel);border-radius:0 16px 16px 0;color:var(--muted)}
+.note strong{color:var(--text)}
 
-    a { color: inherit; }
-    button, input, select { font: inherit; }
-    button, a, input, select { -webkit-tap-highlight-color: transparent; }
+/* kindness */
+.kind{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;padding:34px;border-radius:26px;border:1px solid var(--border);background:linear-gradient(135deg,var(--panel2),var(--panel))}
+.kind blockquote{margin:0;font:600 clamp(1.25rem,3.2vw,1.75rem)/1.35 Fraunces,Georgia,serif;min-height:3.9em}
+.kind .act{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 
-    a:focus-visible, button:focus-visible,
-    input:focus-visible, select:focus-visible {
-      outline: 3px solid white;
-      outline-offset: 3px;
-    }
+/* safety */
+.safe{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{padding:24px;border-radius:20px;background:var(--panel);border:1px solid var(--border)}
+.box.alert{border-color:var(--accent);box-shadow:var(--shadow)}
+.box h3{font-size:1.25rem;margin-bottom:8px}
+.box p{margin:0 0 14px;color:var(--muted)}
+.box ul{margin:0;padding-left:1.2em;color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 16px 5%;
-      border-bottom: 1px solid var(--border);
-      background: #151025;
-    }
+footer{margin-top:64px;border-top:1px solid var(--border);padding:34px 0 40px;text-align:center;color:var(--muted);font-size:.93rem}
+footer p{margin:6px auto;max-width:62ch}
+footer strong{color:var(--text)}
+footer a{color:var(--accent);font-weight:700}
 
-    .brand {
-      font-size: 1.4rem;
-      font-weight: 900;
-      text-decoration: none;
-    }
-
-    .brand span { color: var(--accent); }
-    .topbar small { color: var(--muted); }
-
-    nav {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      padding: 12px 5%;
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: .9rem;
-    }
-
-    nav a:hover { color: var(--accent); }
-
-    .hero {
-      text-align: center;
-      padding: 65px 6% 55px;
-      background: radial-gradient(ellipse at top, #49316d, var(--bg) 76%);
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-size: .78rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    h1 {
-      max-width: 780px;
-      margin: 14px auto;
-      font-size: clamp(2.2rem, 7vw, 4.2rem);
-      line-height: 1.12;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 18px auto;
-      color: var(--muted);
-    }
-
-    .founder {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 12px 20px;
-      border: 1px solid #79639c;
-      border-radius: 14px;
-      background: #211633;
-    }
-
-    .founder strong { color: white; }
-    .founder small { display: block; color: var(--accent); }
-
-    .wrap {
-      width: min(1120px, 92%);
-      margin: auto;
-    }
-
-    .section { padding: 35px 0; }
-    .section h2 { margin-bottom: 8px; }
-    .muted { color: var(--muted); }
-
-    .search-panel, .notice, .kindness {
-      padding: 20px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-    }
-
-    .search-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    label {
-      display: block;
-      font-size: .9rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    input, select {
-      width: 100%;
-      min-height: 48px;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #655579;
-      background: #100d20;
-      color: var(--text);
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 18px 0;
-    }
-
-    .filter {
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: var(--panel);
-      border-radius: 999px;
-      padding: 9px 14px;
-      cursor: pointer;
-    }
-
-    .filter.active {
-      background: var(--accent);
-      color: #1b1230;
-      border-color: var(--accent);
-      font-weight: 800;
-    }
-
-    .results-line {
-      color: var(--muted);
-      font-size: .92rem;
-      margin: 12px 0;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      min-width: 0;
-      padding: 20px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    .card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .icon { font-size: 2rem; }
-
-    .tag {
-      display: inline-block;
-      color: #e0d0ff;
-      background: #35264c;
-      border-radius: 7px;
-      padding: 4px 8px;
-      font-size: .76rem;
-      font-weight: 700;
-    }
-
-    .card h3 { margin: 12px 0 5px; }
-    .card p { color: var(--muted); margin: 6px 0 16px; }
-
-    .card a, .primary, .secondary {
-      display: inline-block;
-      padding: 11px 15px;
-      border: 0;
-      border-radius: 10px;
-      background: var(--accent);
-      color: #1b1230;
-      text-decoration: none;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .card a { margin-top: auto; }
-    .card a:hover, .primary:hover { background: #dac8ff; }
-
-    .secondary {
-      background: var(--panel2);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .empty {
-      padding: 28px;
-      text-align: center;
-      background: var(--panel);
-      border-radius: 14px;
-      color: var(--muted);
-    }
-
-    .notice {
-      border-left: 4px solid var(--accent);
-      margin: 16px 0;
-    }
-
-    .notice p { margin: 6px 0; }
-    .notice a { color: var(--accent); }
-
-    .kindness {
-      background: linear-gradient(135deg, #302047, #1d1830);
-      padding: 25px;
-    }
-
-    #kindnessIdea { min-height: 48px; }
-
-    .green { color: var(--green); }
-
-    footer {
-      margin-top: 35px;
-      border-top: 1px solid var(--border);
-      padding: 28px 5%;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    footer a { color: var(--accent); }
-
-    @media (max-width: 600px) {
-      .topbar { padding: 14px 5%; }
-      .hero { padding: 45px 5% 38px; }
-      .search-grid { grid-template-columns: 1fr; }
-      .section { padding: 25px 0; }
-      nav { gap: 12px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        transition: none !important;
-        transform: none !important;
-      }
-    }
-  </style>
+@media (max-width:720px){
+  .bar{flex-wrap:wrap}
+  nav{order:3;width:100%}
+  .hero{padding-top:44px}
+  .quick{flex-direction:column}
+  .kind,.safe{grid-template-columns:1fr}
+  .kind{padding:24px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .arch .draw{animation:none;stroke-dashoffset:0}
+}
+</style>
 </head>
-
 <body>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="SmallBridge home">
-      🌉 Small<span>Bridge</span>
-    </a>
-    <small>Small steps. Real hope.</small>
-  </header>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#home" aria-label="SmallBridge home"><span aria-hidden="true">🌉</span>Small<b>Bridge</b></a>
+    <nav aria-label="Main navigation">
+      <a href="#directory">Find help</a>
+      <a href="#kindness">Kindness</a>
+      <a href="#safety">Safety</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-label="Switch colour theme">🌓</button>
+  </div>
+</header>
 
-  <nav aria-label="Main navigation">
-    <a href="#directory">Help directory</a>
-    <a href="#opportunities">Opportunity Finder</a>
-    <a href="#community">Community</a>
-    <a href="#safety">Safety</a>
-  </nav>
-
-  <main id="home">
-    <section class="hero">
-      <div class="eyebrow">LEARN · GROW · CONNECT</div>
+<main id="home">
+  <div class="hero">
+    <div class="in wrap">
       <h1>Find your next step.</h1>
-      <p>
-        Discover learning resources, digital skills, public services,
-        and practical ways to help your community.
-      </p>
+      <p class="lead">Free learning, digital skills, public services and community support. All in one place, with links to the official sources.</p>
+      <form class="quick" id="heroForm" role="search">
+        <label for="heroSearch" class="sr" style="position:absolute;left:-9999px">Search resources</label>
+        <input id="heroSearch" type="search" placeholder="Try coding, jobs, safety, school…" autocomplete="off">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <p class="founder">Created by <strong>Megan Oloo</strong>, Founder of SmallBridge</p>
+    </div>
+    <svg class="arch" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <path class="draw" d="M0 150 C 250 -40, 750 -40, 1000 150"/>
+      <path class="cable" d="M120 62V150M220 36V150M320 22V150M420 14V150M520 14V150M620 14V150M720 22V150M820 36V150M910 62V150"/>
+      <path class="deck" d="M0 150H1000"/>
+    </svg>
+  </div>
 
-      <div class="founder">
-        <strong>Megan Oloo</strong>
-        <small>Founder of SmallBridge</small>
+  <div class="wrap">
+    <section id="directory">
+      <div class="head">
+        <div>
+          <h2>Find help</h2>
+          <p class="sub">Search by topic or pick a category. Save the ones you want to come back to.</p>
+        </div>
       </div>
-
-      <p><a class="primary" href="#opportunities">Explore opportunities ↓</a></p>
+      <label for="search" style="position:absolute;left:-9999px">Search resources</label>
+      <div class="quick" style="margin:0 0 14px;max-width:none;box-shadow:none">
+        <input id="search" type="search" placeholder="Search resources…" autocomplete="off">
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Categories"></div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div class="cards" id="cards"></div>
+      <div class="empty" id="empty" hidden></div>
+      <div class="note"><strong>Before you sign up.</strong> Some platforms are free, while certificates, equipment or specific programmes may cost money. Never pay anyone who promises guaranteed employment. Confirm fees and eligibility with each provider.</div>
     </section>
 
-    <div class="wrap">
-      <!-- HELP DIRECTORY -->
-      <section class="section" id="directory">
-        <h2>🌍 Free Help Directory</h2>
-        <p class="muted">
-          Find useful resources. Search by topic or select a category.
-        </p>
-
-        <div class="search-panel">
-          <label for="search">Search resources</label>
-          <input id="search" type="search"
-            placeholder="Try learning, jobs, safety..."
-            autocomplete="off">
-
-          <div class="filters" aria-label="Resource categories">
-            <button class="filter active" data-category="all" aria-pressed="true">All</button>
-            <button class="filter" data-category="learning" aria-pressed="false">📚 Learning</button>
-            <button class="filter" data-category="work" aria-pressed="false">💻 Skills & work</button>
-            <button class="filter" data-category="government" aria-pressed="false">🏛️ Public services</button>
-            <button class="filter" data-category="community" aria-pressed="false">🤝 Community</button>
-            <button class="filter" data-category="safety" aria-pressed="false">🛟 Safety</button>
-          </div>
+    <section id="kindness">
+      <div class="kind">
+        <div>
+          <h2>One good thing today</h2>
+          <p class="sub">Small acts add up. Pick an idea and do it before the day ends.</p>
         </div>
-
-        <p class="results-line" id="directoryCount" aria-live="polite"></p>
-        <div class="cards" id="directoryCards"></div>
-        <div class="empty" id="directoryEmpty" hidden>
-          No matches found. Try another search or category.
+        <div>
+          <blockquote id="idea" aria-live="polite">Tap the button for a small act of kindness.</blockquote>
+          <div class="act"><button class="btn" id="newIdea" type="button">Give me an idea</button></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- OPPORTUNITY FINDER -->
-      <section class="section" id="opportunities">
-        <div class="eyebrow">YOUR NEXT CHAPTER</div>
-        <h2>🚀 Opportunity Finder</h2>
-        <p class="muted">
-          Choose an interest to discover learning platforms and skills
-          resources. Check each provider for current courses and conditions.
-        </p>
-
-        <div class="search-panel">
-          <label for="interest">What would you like to explore?</label>
-          <select id="interest">
-            <option value="all">All opportunities</option>
-            <option value="learning">School and general learning</option>
-            <option value="coding">Coding and technology</option>
-            <option value="digital">Digital and career skills</option>
-            <option value="business">Business and entrepreneurship</option>
-          </select>
-
-          <label for="opportunitySearch" style="margin-top:14px">
-            Search opportunities
-          </label>
-          <input id="opportunitySearch" type="search"
-            placeholder="Try coding, business, computers..."
-            autocomplete="off">
+    <section id="safety">
+      <div class="head"><h2>Your safety matters</h2></div>
+      <div class="safe">
+        <div class="box alert">
+          <h3>In immediate danger in Kenya?</h3>
+          <p>Call 999 or 112 now. SmallBridge is a directory, not an emergency service.</p>
+          <div class="row"><a class="btn" href="tel:999">Call 999</a><a class="btn ghost" href="tel:112">Call 112</a></div>
         </div>
-
-        <p class="results-line" id="opportunityCount" aria-live="polite"></p>
-        <div class="cards" id="opportunityCards"></div>
-        <div class="empty" id="opportunityEmpty" hidden>
-          No matching opportunities found. Try another interest.
+        <div class="box">
+          <h3>Stay safe online</h3>
+          <ul>
+            <li>Keep passwords, ID numbers and bank details private.</li>
+            <li>Be wary of offers that ask for money for jobs, grants or help.</li>
+            <li>Check information with the official provider.</li>
+          </ul>
         </div>
+      </div>
+    </section>
+  </div>
+</main>
 
-        <div class="notice">
-          <strong class="green">A quick reminder</strong>
-          <p>
-            Some platforms offer free learning, while certificates,
-            equipment, or particular programmes may cost money.
-            Never pay someone who promises guaranteed employment.
-          </p>
-        </div>
-      </section>
-
-      <!-- COMMUNITY -->
-      <section class="section" id="community">
-        <h2>🤝 Community Support</h2>
-        <p class="muted">
-          Contact recognized organizations to ask about current assistance
-          or referrals. Availability varies by location and circumstances.
-        </p>
-
-        <div class="notice">
-          <strong>Kenya Red Cross</strong>
-          <p>
-            Visit the official website to learn about humanitarian work
-            and ask about available support.
-          </p>
-          <a href="https://www.redcross.or.ke/"
-             target="_blank" rel="noopener noreferrer">
-            Visit Kenya Red Cross ↗
-          </a>
-        </div>
-
-        <div class="notice">
-          <strong>Kenya citizen services</strong>
-          <p>
-            Explore official information about government digital services.
-          </p>
-          <a href="https://www.icta.go.ke/citizens"
-             target="_blank" rel="noopener noreferrer">
-            Explore citizen services ↗
-          </a>
-        </div>
-      </section>
-
-      <!-- KINDNESS -->
-      <section class="section" id="kindness">
-        <div class="kindness">
-          <div class="eyebrow">ONE GOOD THING</div>
-          <h2>Make someone's day better.</h2>
-          <p id="kindnessIdea" aria-live="polite">
-            Discover one small act of kindness you can do today.
-          </p>
-          <button class="primary" id="newIdea">Give me an idea ✨</button>
-        </div>
-      </section>
-
-      <!-- SAFETY -->
-      <section class="section" id="safety">
-        <h2>🛟 Your Safety Matters</h2>
-
-        <div class="notice">
-          <strong>Immediate danger in Kenya?</strong>
-          <p>
-            Call 999 or 112 for emergency assistance.
-            SmallBridge is a directory, not an emergency response service.
-          </p>
-          <p><a href="tel:999">Call 999</a> · <a href="tel:112">Call 112</a></p>
-        </div>
-
-        <p class="muted">
-          Protect your passwords, identity numbers, bank details, and
-          home address. Be cautious of offers demanding money in exchange
-          for guaranteed jobs, grants, or assistance. Verify information
-          through official providers.
-        </p>
-      </section>
-    </div>
-  </main>
-
-  <footer>
-    <p><strong>SmallBridge</strong> — Building bridges. Opening opportunities.</p>
+<footer>
+  <div class="wrap">
+    <p><strong>SmallBridge</strong>. Building bridges. Opening opportunities.</p>
     <p>Created by <strong>Megan Oloo</strong>, Founder of SmallBridge.</p>
-    <p>
-      Resources are starting points, not guarantees. Confirm current fees,
-      eligibility, and availability directly with each provider.
-    </p>
-    <p>Made with care 💜</p>
-  </footer>
+    <p>Resources are starting points, not guarantees. Confirm current fees, eligibility and availability directly with each provider.</p>
+    <p>Made with care 💜 · <a href="#home">Back to top</a></p>
+  </div>
+</footer>
 
-  <script>
-    const directoryResources = [
-      {
-        name: "Khan Academy",
-        category: "learning",
-        icon: "📚",
-        tag: "Free learning",
-        description: "Study maths, science, computing, and other subjects at your own pace.",
-        url: "https://www.khanacademy.org/",
-        terms: "school students education lessons"
-      },
-      {
-        name: "Ajira Digital",
-        category: "work",
-        icon: "💻",
-        tag: "Digital skills",
-        description: "Explore digital-work training and programme information in Kenya.",
-        url: "https://www.ajiradigital.go.ke/",
-        terms: "online work training kenya youth careers"
-      },
-      {
-        name: "ICT Authority — Citizen Services",
-        category: "government",
-        icon: "🏛️",
-        tag: "Public information",
-        description: "Explore information about Kenyan digital and public services.",
-        url: "https://www.icta.go.ke/citizens",
-        terms: "government huduma public services"
-      },
-      {
-        name: "Kenya Red Cross",
-        category: "community",
-        icon: "🤝",
-        tag: "Humanitarian support",
-        description: "Ask a recognized humanitarian organization about current assistance and referrals.",
-        url: "https://www.redcross.or.ke/",
-        terms: "community essential needs humanitarian"
-      },
-      {
-        name: "National Police Service",
-        category: "safety",
-        icon: "🛟",
-        tag: "Safety information",
-        description: "Find official police information. For emergencies in Kenya, call 999 or 112.",
-        url: "https://www.nationalpolice.go.ke/",
-        terms: "police emergency safety help"
-      },
-      {
-        name: "Khan Academy Computing",
-        category: "learning",
-        icon: "🧠",
-        tag: "Build knowledge",
-        description: "Explore computing and technology through educational lessons.",
-        url: "https://www.khanacademy.org/computing",
-        terms: "coding computers programming technology"
-      },
-      {
-        name: "Kenya Open Data",
-        category: "government",
-        icon: "📊",
-        tag: "Public information",
-        description: "Explore public datasets for research, projects, and learning.",
-        url: "https://opendata.go.ke/",
-        terms: "data research projects government"
-      }
-    ];
+<script>
+"use strict";
+var CATS=[["all","All"],["saved","♥ Saved"],["learning","📚 Learning"],["coding","💻 Coding & tech"],["digital","🌐 Digital skills"],["business","💡 Business"],["government","🏛️ Public services"],["community","🤝 Community"],["safety","🛟 Safety"]];
+var R=[
+["Khan Academy","learning","📚","Free learning","Study maths, science, computing and more at your own pace.","https://www.khanacademy.org/","school students lessons education"],
+["Khan Academy Computing","coding","🧠","Computing basics","Learn computing and technology fundamentals through lessons.","https://www.khanacademy.org/computing","programming computers beginner"],
+["freeCodeCamp","coding","👩‍💻","Coding practice","Learn web development and programming with hands-on exercises.","https://www.freecodecamp.org/","html css javascript websites"],
+["Microsoft Learn","coding","🖥️","Technology learning","Technical learning paths for Microsoft technologies.","https://learn.microsoft.com/training/","cloud developer computers"],
+["Ajira Digital","digital","💼","Kenya programme","Official information on digital-work training and opportunities in Kenya.","https://www.ajiradigital.go.ke/","online work freelancing jobs careers"],
+["Google Applied Digital Skills","digital","🌐","Digital skills","Practical lessons for digital tools and work-related skills.","https://applieddigitalskills.withgoogle.com/","computer internet career work"],
+["IBM SkillsBuild","digital","🎓","Skills development","Technology and workplace learning resources.","https://skillsbuild.org/","career technology learning"],
+["Google for Startups","business","🚀","Startup resources","Resources for people interested in startups and entrepreneurship.","https://startup.google.com/","business founder entrepreneurship"],
+["ICT Authority: Citizen Services","government","🏛️","Public information","Information about Kenyan digital and public services.","https://www.icta.go.ke/citizens","government huduma public services"],
+["Kenya Open Data","government","📊","Public data","Public datasets for research, projects and learning.","https://opendata.go.ke/","data research projects"],
+["Kenya Red Cross","community","🤝","Humanitarian support","Ask a recognised humanitarian organisation about current assistance and referrals.","https://www.redcross.or.ke/","essential needs humanitarian aid"],
+["National Police Service","safety","🛟","Safety information","Official police information. In an emergency in Kenya, call 999 or 112.","https://www.nationalpolice.go.ke/","police emergency help"]
+].map(function(a,i){return{id:i,name:a[0],cat:a[1],icon:a[2],tag:a[3],desc:a[4],url:a[5],terms:a[6]}});
 
-    const opportunities = [
-      {
-        name: "Khan Academy",
-        category: "learning",
-        icon: "📚",
-        tag: "Free learning resources",
-        description: "Learn school subjects and practise skills at your own pace.",
-        url: "https://www.khanacademy.org/",
-        terms: "school maths science study"
-      },
-      {
-        name: "freeCodeCamp",
-        category: "coding",
-        icon: "👩‍💻",
-        tag: "Free coding lessons",
-        description: "Start learning web development, programming, and coding projects.",
-        url: "https://www.freecodecamp.org/",
-        terms: "html css javascript websites coding programming"
-      },
-      {
-        name: "Microsoft Learn",
-        category: "coding",
-        icon: "🖥️",
-        tag: "Technology learning",
-        description: "Explore technical learning paths and documentation for Microsoft technologies.",
-        url: "https://learn.microsoft.com/training/",
-        terms: "computers cloud technology developer coding"
-      },
-      {
-        name: "Google Applied Digital Skills",
-        category: "digital",
-        icon: "🌐",
-        tag: "Digital skills",
-        description: "Explore practical lessons for using digital tools and building work-related skills.",
-        url: "https://applieddigitalskills.withgoogle.com/",
-        terms: "computer internet digital career work"
-      },
-      {
-        name: "Ajira Digital",
-        category: "digital",
-        icon: "💼",
-        tag: "Kenya programme",
-        description: "Check official information about digital-work training and programme opportunities.",
-        url: "https://www.ajiradigital.go.ke/",
-        terms: "kenya digital work freelancing training jobs"
-      },
-      {
-        name: "IBM SkillsBuild",
-        category: "digital",
-        icon: "🎓",
-        tag: "Skills development",
-        description: "Explore technology and workplace learning resources; check course requirements.",
-        url: "https://skillsbuild.org/",
-        terms: "technology career digital learning"
-      },
-      {
-        name: "Google for Startups",
-        category: "business",
-        icon: "💡",
-        tag: "Startup resources",
-        description: "Explore resources for people interested in startups and entrepreneurship.",
-        url: "https://startup.google.com/",
-        terms: "business startup founder entrepreneurship"
-      },
-      {
-        name: "Khan Academy Computing",
-        category: "coding",
-        icon: "🧩",
-        tag: "Computing basics",
-        description: "Explore computing topics before moving on to more advanced projects.",
-        url: "https://www.khanacademy.org/computing",
-        terms: "programming computer technology beginner"
-      }
-    ];
+var IDEAS=["Send a message to someone you haven’t spoken to in a while.","Teach a friend one thing you learned this week.","Share a free learning link with someone starting out.","Offer to help a neighbour carry something.","Thank a teacher or mentor, in writing.","Donate clothes you no longer wear.","Help a family member set up a strong password.","Leave an honest, kind review for a local business.","Sit with someone who looks lonely and ask how they are.","Pick up litter on your street for five minutes."];
 
-    function safeLink(url, name) {
-      const link = document.createElement("a");
-      link.href = url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Visit official website ↗";
-      link.setAttribute("aria-label", "Visit " + name + " official website");
-      return link;
-    }
+var state={cat:"all",q:"",saved:[]};
+try{var s=JSON.parse(localStorage.getItem("sb-saved")||"[]");if(Array.isArray(s))state.saved=s}catch(e){}
+function persist(){try{localStorage.setItem("sb-saved",JSON.stringify(state.saved))}catch(e){}}
 
-    function renderCards(items, container, count, empty, query, category) {
-      const q = query.trim().toLowerCase();
+var $=function(id){return document.getElementById(id)};
+var cardsEl=$("cards"),countEl=$("count"),emptyEl=$("empty"),filtersEl=$("filters");
 
-      const matches = items.filter(item => {
-        const matchesCategory =
-          category === "all" || item.category === category;
+function buildFilters(){
+  filtersEl.textContent="";
+  CATS.forEach(function(c){
+    var b=document.createElement("button");
+    b.type="button";b.className="chip";b.textContent=c[1];
+    b.setAttribute("aria-pressed",String(state.cat===c[0]));
+    b.addEventListener("click",function(){state.cat=c[0];buildFilters();render()});
+    filtersEl.appendChild(b);
+  });
+}
 
-        const text = [
-          item.name, item.description, item.tag,
-          item.terms, item.category
-        ].join(" ").toLowerCase();
+function make(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text)e.textContent=text;return e}
 
-        return matchesCategory && text.includes(q);
-      });
+function render(){
+  var q=state.q.trim().toLowerCase();
+  var list=R.filter(function(r){
+    if(state.cat==="saved"&&state.saved.indexOf(r.id)<0)return false;
+    if(state.cat!=="all"&&state.cat!=="saved"&&r.cat!==state.cat)return false;
+    return !q||(r.name+" "+r.tag+" "+r.desc+" "+r.terms+" "+r.cat).toLowerCase().indexOf(q)>-1;
+  });
+  cardsEl.textContent="";
+  list.forEach(function(r){
+    var card=make("article","card");
+    var top=make("div","top");
+    top.appendChild(make("div","ico",r.icon));
+    var on=state.saved.indexOf(r.id)>-1;
+    var sv=make("button","save",on?"♥":"♡");
+    sv.type="button";sv.setAttribute("aria-pressed",String(on));
+    sv.setAttribute("aria-label",(on?"Remove ":"Save ")+r.name+(on?" from saved":""));
+    sv.addEventListener("click",function(){
+      var i=state.saved.indexOf(r.id);
+      if(i>-1)state.saved.splice(i,1);else state.saved.push(r.id);
+      persist();render();
+    });
+    top.appendChild(sv);
+    card.appendChild(top);
+    card.appendChild(make("span","tag",r.tag));
+    card.appendChild(make("h3","",r.name));
+    card.appendChild(make("p","",r.desc));
+    var a=make("a","btn","Visit official website ↗");
+    a.href=r.url;a.target="_blank";a.rel="noopener noreferrer";
+    a.setAttribute("aria-label","Visit "+r.name+" official website");
+    card.appendChild(a);
+    cardsEl.appendChild(card);
+  });
+  countEl.textContent=list.length+(list.length===1?" resource":" resources")+" shown";
+  emptyEl.hidden=list.length>0;
+  if(!list.length){
+    emptyEl.textContent=state.cat==="saved"&&!q?"Nothing saved yet. Tap the heart on any resource to keep it here.":"No matches. Try a different word or choose another category.";
+  }
+}
 
-      container.replaceChildren();
+$("search").addEventListener("input",function(e){state.q=e.target.value;render()});
+$("heroForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  state.q=$("heroSearch").value;$("search").value=state.q;state.cat="all";
+  buildFilters();render();
+  $("directory").scrollIntoView({behavior:"smooth"});
+});
 
-      matches.forEach(item => {
-        const card = document.createElement("article");
-        card.className = "card";
+var last=-1;
+$("newIdea").addEventListener("click",function(){
+  var i;do{i=Math.floor(Math.random()*IDEAS.length)}while(i===last&&IDEAS.length>1);
+  last=i;$("idea").textContent=IDEAS[i];$("newIdea").textContent="Another idea";
+});
 
-        const icon = document.createElement("div");
-        icon.className = "icon";
-        icon.setAttribute("aria-hidden", "true");
-        icon.textContent = item.icon;
+$("theme").addEventListener("click",function(){
+  var root=document.documentElement;
+  var dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme=dark?"light":"dark";
+});
 
-        const tag = document.createElement("span");
-        tag.className = "tag";
-        tag.textContent = item.tag;
-
-        const heading = document.createElement("h3");
-        heading.textContent = item.name;
-
-        const description = document.createElement("p");
-        description.textContent = item.description;
-
-        card.append(icon, tag, heading, description,
-          safeLink(item.url, item.name));
-        container.append(card);
-      });
-
-      count.textContent = matches.length +
-        (matches.lengt
+buildFilters();render();
+</script>
+</body>
+</html>
+```
