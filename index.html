@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#100d20">
-  <meta name="description" content="SmallBridge helps you discover learning, community support, and useful public services.">
-  <title>SmallBridge | Free Help Directory</title>
+  <meta name="description" content="SmallBridge by Megan Oloo connects people with learning, digital skills, public services, and community resources.">
+  <title>SmallBridge | Megan Oloo</title>
 
   <style>
     :root {
@@ -17,10 +17,10 @@
       --muted: #c8bfd9;
       --accent: #c3a5ff;
       --border: #403454;
+      --green: #a7f3d0;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -32,12 +32,8 @@
     }
 
     a { color: inherit; }
-
     button, input, select { font: inherit; }
-
-    button, a, input, select {
-      -webkit-tap-highlight-color: transparent;
-    }
+    button, a, input, select { -webkit-tap-highlight-color: transparent; }
 
     a:focus-visible, button:focus-visible,
     input:focus-visible, select:focus-visible {
@@ -50,58 +46,85 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      padding: 18px 6%;
+      flex-wrap: wrap;
+      padding: 16px 5%;
       border-bottom: 1px solid var(--border);
+      background: #151025;
     }
 
     .brand {
-      font-size: 1.35rem;
-      font-weight: 800;
+      font-size: 1.4rem;
+      font-weight: 900;
       text-decoration: none;
     }
 
     .brand span { color: var(--accent); }
-
     .topbar small { color: var(--muted); }
+
+    nav {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 12px 5%;
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    nav a:hover { color: var(--accent); }
 
     .hero {
       text-align: center;
-      padding: 60px 6% 45px;
-      background: radial-gradient(ellipse at top, #3a265c, var(--bg) 75%);
+      padding: 65px 6% 55px;
+      background: radial-gradient(ellipse at top, #49316d, var(--bg) 76%);
     }
 
     .eyebrow {
       color: var(--accent);
       font-size: .78rem;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 2px;
     }
 
     h1 {
-      max-width: 760px;
+      max-width: 780px;
       margin: 14px auto;
-      font-size: clamp(2.1rem, 7vw, 4rem);
+      font-size: clamp(2.2rem, 7vw, 4.2rem);
       line-height: 1.12;
     }
 
     .hero p {
       max-width: 650px;
-      margin: 16px auto;
+      margin: 18px auto;
       color: var(--muted);
     }
 
+    .founder {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 20px;
+      border: 1px solid #79639c;
+      border-radius: 14px;
+      background: #211633;
+    }
+
+    .founder strong { color: white; }
+    .founder small { display: block; color: var(--accent); }
+
     .wrap {
-      width: min(1120px, 90%);
+      width: min(1120px, 92%);
       margin: auto;
     }
 
-    .section { padding: 32px 0; }
-
+    .section { padding: 35px 0; }
     .section h2 { margin-bottom: 8px; }
-
     .muted { color: var(--muted); }
 
-    .search-panel {
+    .search-panel, .notice, .kindness {
       padding: 20px;
       background: var(--panel);
       border: 1px solid var(--border);
@@ -163,7 +186,7 @@
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
       gap: 16px;
     }
 
@@ -171,11 +194,16 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      min-width: 0;
+      padding: 20px;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
-      min-width: 0;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
     }
 
     .icon { font-size: 2rem; }
@@ -191,21 +219,28 @@
     }
 
     .card h3 { margin: 12px 0 5px; }
-
     .card p { color: var(--muted); margin: 6px 0 16px; }
 
-    .card a {
-      margin-top: auto;
+    .card a, .primary, .secondary {
       display: inline-block;
-      padding: 10px 14px;
+      padding: 11px 15px;
+      border: 0;
       border-radius: 10px;
       background: var(--accent);
       color: #1b1230;
       text-decoration: none;
       font-weight: 800;
+      cursor: pointer;
     }
 
-    .card a:hover { background: #dac8ff; }
+    .card a { margin-top: auto; }
+    .card a:hover, .primary:hover { background: #dac8ff; }
+
+    .secondary {
+      background: var(--panel2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
 
     .empty {
       padding: 28px;
@@ -216,38 +251,26 @@
     }
 
     .notice {
-      background: var(--panel2);
       border-left: 4px solid var(--accent);
-      padding: 18px;
-      border-radius: 10px;
-      margin: 18px 0;
+      margin: 16px 0;
     }
 
     .notice p { margin: 6px 0; }
+    .notice a { color: var(--accent); }
 
     .kindness {
       background: linear-gradient(135deg, #302047, #1d1830);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 24px;
+      padding: 25px;
     }
 
-    .primary {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 16px;
-      background: var(--accent);
-      color: #1b1230;
-      font-weight: 800;
-      cursor: pointer;
-    }
+    #kindnessIdea { min-height: 48px; }
 
-    #kindnessIdea { min-height: 50px; }
+    .green { color: var(--green); }
 
     footer {
       margin-top: 35px;
       border-top: 1px solid var(--border);
-      padding: 25px 5%;
+      padding: 28px 5%;
       text-align: center;
       color: var(--muted);
     }
@@ -255,341 +278,398 @@
     footer a { color: var(--accent); }
 
     @media (max-width: 600px) {
-      .topbar { padding: 15px 5%; }
-      .topbar small { font-size: .75rem; }
-      .hero { padding: 45px 5% 35px; }
-      .wrap { width: 92%; }
+      .topbar { padding: 14px 5%; }
+      .hero { padding: 45px 5% 38px; }
       .search-grid { grid-template-columns: 1fr; }
-      .section { padding: 24px 0; }
+      .section { padding: 25px 0; }
+      nav { gap: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition: none !important;
+        transform: none !important;
+      }
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <a class="brand" href="#" aria-label="SmallBridge home">
+    <a class="brand" href="#home" aria-label="SmallBridge home">
       🌉 Small<span>Bridge</span>
     </a>
     <small>Small steps. Real hope.</small>
   </header>
 
-  <main>
+  <nav aria-label="Main navigation">
+    <a href="#directory">Help directory</a>
+    <a href="#opportunities">Opportunity Finder</a>
+    <a href="#community">Community</a>
+    <a href="#safety">Safety</a>
+  </nav>
+
+  <main id="home">
     <section class="hero">
-      <div class="eyebrow">FREE HELP DIRECTORY</div>
+      <div class="eyebrow">LEARN · GROW · CONNECT</div>
       <h1>Find your next step.</h1>
       <p>
-        Discover learning resources, public services, community support,
-        and practical ways to make a difference.
+        Discover learning resources, digital skills, public services,
+        and practical ways to help your community.
       </p>
+
+      <div class="founder">
+        <strong>Megan Oloo</strong>
+        <small>Founder of SmallBridge</small>
+      </div>
+
+      <p><a class="primary" href="#opportunities">Explore opportunities ↓</a></p>
     </section>
 
     <div class="wrap">
-      <section class="section" aria-labelledby="directoryHeading">
+      <!-- HELP DIRECTORY -->
+      <section class="section" id="directory">
+        <h2>🌍 Free Help Directory</h2>
+        <p class="muted">
+          Find useful resources. Search by topic or select a category.
+        </p>
+
         <div class="search-panel">
-          <h2 id="directoryHeading">What are you looking for?</h2>
-          <p class="muted">Search by topic or choose a category below.</p>
+          <label for="search">Search resources</label>
+          <input id="search" type="search"
+            placeholder="Try learning, jobs, safety..."
+            autocomplete="off">
 
-          <div class="search-grid">
-            <div>
-              <label for="search">Search resources</label>
-              <input id="search" type="search"
-                placeholder="Try learning, jobs, food, government..."
-                autocomplete="off">
-            </div>
-
-            <div>
-              <label for="categorySelect">Category</label>
-              <select id="categorySelect">
-                <option value="all">All categories</option>
-                <option value="learning">Learning</option>
-                <option value="work">Skills and work</option>
-                <option value="government">Public services</option>
-                <option value="community">Community support</option>
-                <option value="safety">Safety</option>
-              </select>
-            </div>
+          <div class="filters" aria-label="Resource categories">
+            <button class="filter active" data-category="all" aria-pressed="true">All</button>
+            <button class="filter" data-category="learning" aria-pressed="false">📚 Learning</button>
+            <button class="filter" data-category="work" aria-pressed="false">💻 Skills & work</button>
+            <button class="filter" data-category="government" aria-pressed="false">🏛️ Public services</button>
+            <button class="filter" data-category="community" aria-pressed="false">🤝 Community</button>
+            <button class="filter" data-category="safety" aria-pressed="false">🛟 Safety</button>
           </div>
         </div>
 
-        <div class="filters" aria-label="Quick category filters">
-          <button class="filter active" data-category="all" aria-pressed="true">All</button>
-          <button class="filter" data-category="learning" aria-pressed="false">📚 Learning</button>
-          <button class="filter" data-category="work" aria-pressed="false">💻 Skills & work</button>
-          <button class="filter" data-category="government" aria-pressed="false">🏛️ Public services</button>
-          <button class="filter" data-category="community" aria-pressed="false">🤝 Community</button>
-          <button class="filter" data-category="safety" aria-pressed="false">🛟 Safety</button>
-        </div>
-
-        <p class="results-line" id="resultCount" aria-live="polite"></p>
-        <div class="cards" id="resourceList"></div>
-        <div class="empty" id="emptyState" hidden>
-          No matching resources found. Try another word or category.
+        <p class="results-line" id="directoryCount" aria-live="polite"></p>
+        <div class="cards" id="directoryCards"></div>
+        <div class="empty" id="directoryEmpty" hidden>
+          No matches found. Try another search or category.
         </div>
       </section>
 
-      <section class="section" aria-labelledby="communityHeading">
-        <h2 id="communityHeading">Community support</h2>
+      <!-- OPPORTUNITY FINDER -->
+      <section class="section" id="opportunities">
+        <div class="eyebrow">YOUR NEXT CHAPTER</div>
+        <h2>🚀 Opportunity Finder</h2>
         <p class="muted">
-          Looking for food, essential items, or help in your area?
+          Choose an interest to discover learning platforms and skills
+          resources. Check each provider for current courses and conditions.
+        </p>
+
+        <div class="search-panel">
+          <label for="interest">What would you like to explore?</label>
+          <select id="interest">
+            <option value="all">All opportunities</option>
+            <option value="learning">School and general learning</option>
+            <option value="coding">Coding and technology</option>
+            <option value="digital">Digital and career skills</option>
+            <option value="business">Business and entrepreneurship</option>
+          </select>
+
+          <label for="opportunitySearch" style="margin-top:14px">
+            Search opportunities
+          </label>
+          <input id="opportunitySearch" type="search"
+            placeholder="Try coding, business, computers..."
+            autocomplete="off">
+        </div>
+
+        <p class="results-line" id="opportunityCount" aria-live="polite"></p>
+        <div class="cards" id="opportunityCards"></div>
+        <div class="empty" id="opportunityEmpty" hidden>
+          No matching opportunities found. Try another interest.
+        </div>
+
+        <div class="notice">
+          <strong class="green">A quick reminder</strong>
+          <p>
+            Some platforms offer free learning, while certificates,
+            equipment, or particular programmes may cost money.
+            Never pay someone who promises guaranteed employment.
+          </p>
+        </div>
+      </section>
+
+      <!-- COMMUNITY -->
+      <section class="section" id="community">
+        <h2>🤝 Community Support</h2>
+        <p class="muted">
+          Contact recognized organizations to ask about current assistance
+          or referrals. Availability varies by location and circumstances.
         </p>
 
         <div class="notice">
-          <strong>Start with a trusted local organization.</strong>
+          <strong>Kenya Red Cross</strong>
           <p>
-            Contact the Kenya Red Cross or a recognized community organization
-            to ask what support or referrals may currently be available.
-            Assistance depends on location, eligibility, and current resources.
+            Visit the official website to learn about humanitarian work
+            and ask about available support.
           </p>
-          <p>
-            <a href="https://www.redcross.or.ke/"
-               target="_blank" rel="noopener noreferrer">
-              Visit Kenya Red Cross website ↗
-            </a>
-          </p>
+          <a href="https://www.redcross.or.ke/"
+             target="_blank" rel="noopener noreferrer">
+            Visit Kenya Red Cross ↗
+          </a>
         </div>
 
         <div class="notice">
-          <strong>Need help accessing government services?</strong>
+          <strong>Kenya citizen services</strong>
           <p>
-            Huduma Centres provide in-person assistance with government
-            services. Check official information before visiting.
+            Explore official information about government digital services.
           </p>
-          <p>
-            <a href="https://www.icta.go.ke/citizens"
-               target="_blank" rel="noopener noreferrer">
-              Explore Kenya citizen services ↗
-            </a>
-          </p>
+          <a href="https://www.icta.go.ke/citizens"
+             target="_blank" rel="noopener noreferrer">
+            Explore citizen services ↗
+          </a>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="kindnessHeading">
+      <!-- KINDNESS -->
+      <section class="section" id="kindness">
         <div class="kindness">
           <div class="eyebrow">ONE GOOD THING</div>
-          <h2 id="kindnessHeading">Make someone's day better.</h2>
+          <h2>Make someone's day better.</h2>
           <p id="kindnessIdea" aria-live="polite">
             Discover one small act of kindness you can do today.
           </p>
-          <button class="primary" id="newIdea">Give me an idea</button>
+          <button class="primary" id="newIdea">Give me an idea ✨</button>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="safetyHeading">
-        <h2 id="safetyHeading">Your safety matters</h2>
+      <!-- SAFETY -->
+      <section class="section" id="safety">
+        <h2>🛟 Your Safety Matters</h2>
+
         <div class="notice">
           <strong>Immediate danger in Kenya?</strong>
           <p>
             Call 999 or 112 for emergency assistance.
             SmallBridge is a directory, not an emergency response service.
           </p>
-          <p>
-            <a href="tel:999">Call 999</a> ·
-            <a href="tel:112">Call 112</a>
-          </p>
+          <p><a href="tel:999">Call 999</a> · <a href="tel:112">Call 112</a></p>
         </div>
 
         <p class="muted">
-          Protect your privacy. Never publish passwords, identity numbers,
-          bank details, exact home addresses, or private information about
-          another person. Beware of anyone demanding money to promise a job,
-          grant, or assistance. Verify offers through official sources.
+          Protect your passwords, identity numbers, bank details, and
+          home address. Be cautious of offers demanding money in exchange
+          for guaranteed jobs, grants, or assistance. Verify information
+          through official providers.
         </p>
       </section>
     </div>
   </main>
 
   <footer>
-    <p><strong>SmallBridge</strong> — Small actions. Stronger communities.</p>
+    <p><strong>SmallBridge</strong> — Building bridges. Opening opportunities.</p>
+    <p>Created by <strong>Megan Oloo</strong>, Founder of SmallBridge.</p>
     <p>
-      Resources may change. Confirm current availability, fees, eligibility,
-      and service details directly with each provider.
+      Resources are starting points, not guarantees. Confirm current fees,
+      eligibility, and availability directly with each provider.
     </p>
-    <p>Built with care. Free to explore.</p>
+    <p>Made with care 💜</p>
   </footer>
 
   <script>
-    const resources = [
+    const directoryResources = [
       {
         name: "Khan Academy",
         category: "learning",
         icon: "📚",
         tag: "Free learning",
-        description: "Practise maths, science, computing, and other subjects at your own pace.",
+        description: "Study maths, science, computing, and other subjects at your own pace.",
         url: "https://www.khanacademy.org/",
-        terms: "school students study lessons education"
+        terms: "school students education lessons"
       },
       {
         name: "Ajira Digital",
         category: "work",
         icon: "💻",
         tag: "Digital skills",
-        description: "Explore digital-work training, learning opportunities, and programme information in Kenya.",
+        description: "Explore digital-work training and programme information in Kenya.",
         url: "https://www.ajiradigital.go.ke/",
-        terms: "online work training jobs kenya youth"
+        terms: "online work training kenya youth careers"
       },
       {
         name: "ICT Authority — Citizen Services",
         category: "government",
         icon: "🏛️",
         tag: "Public information",
-        description: "Learn about Kenyan e-government services, Huduma Centres, and digital access initiatives.",
+        description: "Explore information about Kenyan digital and public services.",
         url: "https://www.icta.go.ke/citizens",
-        terms: "government huduma public services kenya"
+        terms: "government huduma public services"
       },
       {
         name: "Kenya Red Cross",
         category: "community",
         icon: "🤝",
         tag: "Humanitarian support",
-        description: "Contact a recognized humanitarian organization to ask about current assistance and referrals.",
+        description: "Ask a recognized humanitarian organization about current assistance and referrals.",
         url: "https://www.redcross.or.ke/",
-        terms: "food basic needs community emergency support"
+        terms: "community essential needs humanitarian"
       },
       {
         name: "National Police Service",
         category: "safety",
         icon: "🛟",
         tag: "Safety information",
-        description: "Find official police information. For immediate emergencies in Kenya, call 999 or 112.",
+        description: "Find official police information. For emergencies in Kenya, call 999 or 112.",
         url: "https://www.nationalpolice.go.ke/",
-        terms: "police emergency safety kenya help"
+        terms: "police emergency safety help"
       },
       {
         name: "Khan Academy Computing",
         category: "learning",
         icon: "🧠",
         tag: "Build knowledge",
-        description: "Explore computing and other learning topics through free educational lessons.",
+        description: "Explore computing and technology through educational lessons.",
         url: "https://www.khanacademy.org/computing",
-        terms: "coding computers technology programming learn"
-      },
-      {
-        name: "Ajira Training and Learning",
-        category: "work",
-        icon: "🚀",
-        tag: "Skills development",
-        description: "Check the official programme for available training, registration details, and opportunities.",
-        url: "https://www.ajiradigital.go.ke/",
-        terms: "digital skills freelancing career youth training"
+        terms: "coding computers programming technology"
       },
       {
         name: "Kenya Open Data",
         category: "government",
         icon: "📊",
         tag: "Public information",
-        description: "Explore public datasets that can help with research, projects, and understanding Kenya.",
+        description: "Explore public datasets for research, projects, and learning.",
         url: "https://opendata.go.ke/",
-        terms: "data research government information projects"
+        terms: "data research projects government"
       }
     ];
 
-    const searchInput = document.getElementById("search");
-    const categorySelect = document.getElementById("categorySelect");
-    const resourceList = document.getElementById("resourceList");
-    const resultCount = document.getElementById("resultCount");
-    const emptyState = document.getElementById("emptyState");
-    const filterButtons = document.querySelectorAll(".filter");
+    const opportunities = [
+      {
+        name: "Khan Academy",
+        category: "learning",
+        icon: "📚",
+        tag: "Free learning resources",
+        description: "Learn school subjects and practise skills at your own pace.",
+        url: "https://www.khanacademy.org/",
+        terms: "school maths science study"
+      },
+      {
+        name: "freeCodeCamp",
+        category: "coding",
+        icon: "👩‍💻",
+        tag: "Free coding lessons",
+        description: "Start learning web development, programming, and coding projects.",
+        url: "https://www.freecodecamp.org/",
+        terms: "html css javascript websites coding programming"
+      },
+      {
+        name: "Microsoft Learn",
+        category: "coding",
+        icon: "🖥️",
+        tag: "Technology learning",
+        description: "Explore technical learning paths and documentation for Microsoft technologies.",
+        url: "https://learn.microsoft.com/training/",
+        terms: "computers cloud technology developer coding"
+      },
+      {
+        name: "Google Applied Digital Skills",
+        category: "digital",
+        icon: "🌐",
+        tag: "Digital skills",
+        description: "Explore practical lessons for using digital tools and building work-related skills.",
+        url: "https://applieddigitalskills.withgoogle.com/",
+        terms: "computer internet digital career work"
+      },
+      {
+        name: "Ajira Digital",
+        category: "digital",
+        icon: "💼",
+        tag: "Kenya programme",
+        description: "Check official information about digital-work training and programme opportunities.",
+        url: "https://www.ajiradigital.go.ke/",
+        terms: "kenya digital work freelancing training jobs"
+      },
+      {
+        name: "IBM SkillsBuild",
+        category: "digital",
+        icon: "🎓",
+        tag: "Skills development",
+        description: "Explore technology and workplace learning resources; check course requirements.",
+        url: "https://skillsbuild.org/",
+        terms: "technology career digital learning"
+      },
+      {
+        name: "Google for Startups",
+        category: "business",
+        icon: "💡",
+        tag: "Startup resources",
+        description: "Explore resources for people interested in startups and entrepreneurship.",
+        url: "https://startup.google.com/",
+        terms: "business startup founder entrepreneurship"
+      },
+      {
+        name: "Khan Academy Computing",
+        category: "coding",
+        icon: "🧩",
+        tag: "Computing basics",
+        description: "Explore computing topics before moving on to more advanced projects.",
+        url: "https://www.khanacademy.org/computing",
+        terms: "programming computer technology beginner"
+      }
+    ];
 
-    let activeCategory = "all";
+    function safeLink(url, name) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Visit official website ↗";
+      link.setAttribute("aria-label", "Visit " + name + " official website");
+      return link;
+    }
 
-    function renderResources() {
-      const query = searchInput.value.trim().toLowerCase();
-      const category = categorySelect.value;
+    function renderCards(items, container, count, empty, query, category) {
+      const q = query.trim().toLowerCase();
 
-      const matches = resources.filter(resource => {
+      const matches = items.filter(item => {
         const matchesCategory =
-          category === "all" || resource.category === category;
+          category === "all" || item.category === category;
 
-        const searchable = [
-          resource.name,
-          resource.description,
-          resource.tag,
-          resource.terms,
-          resource.category
+        const text = [
+          item.name, item.description, item.tag,
+          item.terms, item.category
         ].join(" ").toLowerCase();
 
-        return matchesCategory && searchable.includes(query);
+        return matchesCategory && text.includes(q);
       });
 
-      resourceList.replaceChildren();
+      container.replaceChildren();
 
-      matches.forEach(resource => {
+      matches.forEach(item => {
         const card = document.createElement("article");
         card.className = "card";
 
         const icon = document.createElement("div");
         icon.className = "icon";
         icon.setAttribute("aria-hidden", "true");
-        icon.textContent = resource.icon;
+        icon.textContent = item.icon;
 
         const tag = document.createElement("span");
         tag.className = "tag";
-        tag.textContent = resource.tag;
+        tag.textContent = item.tag;
 
         const heading = document.createElement("h3");
-        heading.textContent = resource.name;
+        heading.textContent = item.name;
 
         const description = document.createElement("p");
-        description.textContent = resource.description;
+        description.textContent = item.description;
 
-        const link = document.createElement("a");
-        link.href = resource.url;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = "Visit resource ↗";
-        link.setAttribute("aria-label", "Visit " + resource.name);
-
-        card.append(icon, tag, heading, description, link);
-        resourceList.append(card);
+        card.append(icon, tag, heading, description,
+          safeLink(item.url, item.name));
+        container.append(card);
       });
 
-      resultCount.textContent =
-        matches.length + (matches.length === 1 ? " resource found" : " resources found");
-
-      emptyState.hidden = matches.length !== 0;
-    }
-
-    function setCategory(category) {
-      activeCategory = category;
-      categorySelect.value = category;
-
-      filterButtons.forEach(button => {
-        const selected = button.dataset.category === category;
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-      });
-
-      renderResources();
-    }
-
-    searchInput.addEventListener("input", renderResources);
-
-    categorySelect.addEventListener("change", () => {
-      setCategory(categorySelect.value);
-    });
-
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        setCategory(button.dataset.category);
-      });
-    });
-
-    const kindnessIdeas = [
-      "Teach someone a skill you know, even if it takes only ten minutes.",
-      "Encourage a learner who feels unsure about their progress.",
-      "Help someone find a trustworthy free learning resource.",
-      "Offer to help with a small, safe task at home or in your community.",
-      "Thank someone who has made a positive difference in your life.",
-      "Share useful public information without sharing anyone's private details.",
-      "Ask a trusted community group whether it needs volunteers."
-    ];
-
-    document.getElementById("newIdea").addEventListener("click", () => {
-      const index = Math.floor(Math.random() * kindnessIdeas.length);
-      document.getElementById("kindnessIdea").textContent = kindnessIdeas[index];
-    });
-
-    renderResources();
-  </script>
-</body>
-</html>
+      count.textContent = matches.length +
+        (matches.lengt
