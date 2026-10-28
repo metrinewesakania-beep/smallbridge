@@ -3,201 +3,593 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#17112f">
-  <title>SmallBridge — Small Steps, Real Hope</title>
-  <meta name="description" content="Discover practical ways to find help, learn something new, and make a difference.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d20">
+  <meta name="description" content="SmallBridge helps you discover learning, community support, and useful public services.">
+  <title>SmallBridge | Free Help Directory</title>
+
   <style>
+    :root {
+      --bg: #100d20;
+      --panel: #1d1830;
+      --panel2: #28203e;
+      --text: #f8f5ff;
+      --muted: #c8bfd9;
+      --accent: #c3a5ff;
+      --border: #403454;
+    }
+
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #100d20;
-      color: #f7f4ff;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, Arial, sans-serif;
       line-height: 1.6;
     }
 
-    header {
-      padding: 20px 7%;
+    a { color: inherit; }
+
+    button, input, select { font: inherit; }
+
+    button, a, input, select {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a:focus-visible, button:focus-visible,
+    input:focus-visible, select:focus-visible {
+      outline: 3px solid white;
+      outline-offset: 3px;
+    }
+
+    .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #302747;
+      gap: 12px;
+      padding: 18px 6%;
+      border-bottom: 1px solid var(--border);
     }
 
-    .logo { font-size: 1.35rem; font-weight: bold; }
-    .logo span { color: #c5a7ff; }
+    .brand {
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .topbar small { color: var(--muted); }
 
     .hero {
-      padding: 75px 7% 55px;
       text-align: center;
-      background: radial-gradient(ellipse at top, #39245e, #100d20 72%);
+      padding: 60px 6% 45px;
+      background: radial-gradient(ellipse at top, #3a265c, var(--bg) 75%);
     }
 
-    .tag {
-      color: #d5c1ff;
-      font-weight: bold;
+    .eyebrow {
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 800;
       letter-spacing: 2px;
-      font-size: .75rem;
     }
 
     h1 {
-      font-size: clamp(2.3rem, 8vw, 4.3rem);
-      line-height: 1.1;
-      margin: 18px auto;
-      max-width: 800px;
+      max-width: 760px;
+      margin: 14px auto;
+      font-size: clamp(2.1rem, 7vw, 4rem);
+      line-height: 1.12;
     }
 
     .hero p {
-      max-width: 600px;
-      margin: 20px auto;
-      color: #d1cadd;
+      max-width: 650px;
+      margin: 16px auto;
+      color: var(--muted);
     }
 
-    .section { padding: 40px 7%; }
-    .section h2 { font-size: 1.7rem; }
+    .wrap {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
 
-    .grid {
+    .section { padding: 32px 0; }
+
+    .section h2 { margin-bottom: 8px; }
+
+    .muted { color: var(--muted); }
+
+    .search-panel {
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .search-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #655579;
+      background: #100d20;
+      color: var(--text);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .filter {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 9px 14px;
+      cursor: pointer;
+    }
+
+    .filter.active {
+      background: var(--accent);
+      color: #1b1230;
+      border-color: var(--accent);
+      font-weight: 800;
+    }
+
+    .results-line {
+      color: var(--muted);
+      font-size: .92rem;
+      margin: 12px 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
       gap: 16px;
     }
 
     .card {
-      background: #1d1830;
-      border: 1px solid #3a3050;
-      border-radius: 18px;
-      padding: 23px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      min-width: 0;
     }
 
-    .symbol { font-size: 2rem; }
-    .card p { color: #c8c0d8; }
+    .icon { font-size: 2rem; }
 
-    button {
-      background: #b99aff;
+    .tag {
+      display: inline-block;
+      color: #e0d0ff;
+      background: #35264c;
+      border-radius: 7px;
+      padding: 4px 8px;
+      font-size: .76rem;
+      font-weight: 700;
+    }
+
+    .card h3 { margin: 12px 0 5px; }
+
+    .card p { color: var(--muted); margin: 6px 0 16px; }
+
+    .card a {
+      margin-top: auto;
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--accent);
       color: #1b1230;
-      font-weight: bold;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .card a:hover { background: #dac8ff; }
+
+    .empty {
+      padding: 28px;
+      text-align: center;
+      background: var(--panel);
+      border-radius: 14px;
+      color: var(--muted);
+    }
+
+    .notice {
+      background: var(--panel2);
+      border-left: 4px solid var(--accent);
+      padding: 18px;
+      border-radius: 10px;
+      margin: 18px 0;
+    }
+
+    .notice p { margin: 6px 0; }
+
+    .kindness {
+      background: linear-gradient(135deg, #302047, #1d1830);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .primary {
       border: 0;
       border-radius: 10px;
-      padding: 12px 17px;
+      padding: 12px 16px;
+      background: var(--accent);
+      color: #1b1230;
+      font-weight: 800;
       cursor: pointer;
-      font-size: 1rem;
     }
 
-    button:hover { background: #d0bcff; }
-
-    .result {
-      margin-top: 20px;
-      padding: 18px;
-      background: #29203e;
-      border-radius: 12px;
-      color: #f2eaff;
-      min-height: 65px;
-    }
-
-    .note { color: #bcb2cc; font-size: .9rem; }
+    #kindnessIdea { min-height: 50px; }
 
     footer {
-      border-top: 1px solid #302747;
-      padding: 25px 7%;
-      color: #bcb2cc;
+      margin-top: 35px;
+      border-top: 1px solid var(--border);
+      padding: 25px 5%;
       text-align: center;
+      color: var(--muted);
     }
 
-    :focus-visible {
-      outline: 3px solid #e2d3ff;
-      outline-offset: 4px;
+    footer a { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .topbar { padding: 15px 5%; }
+      .topbar small { font-size: .75rem; }
+      .hero { padding: 45px 5% 35px; }
+      .wrap { width: 92%; }
+      .search-grid { grid-template-columns: 1fr; }
+      .section { padding: 24px 0; }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">🌉 Small<span>Bridge</span></div>
-    <div>Small steps. Real hope.</div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="SmallBridge home">
+      🌉 Small<span>Bridge</span>
+    </a>
+    <small>Small steps. Real hope.</small>
   </header>
 
   <main>
     <section class="hero">
-      <div class="tag">A LITTLE HELP CAN GO A LONG WAY</div>
-      <h1>Someone needs help.<br>Someone can help.</h1>
+      <div class="eyebrow">FREE HELP DIRECTORY</div>
+      <h1>Find your next step.</h1>
       <p>
-        Life can be difficult sometimes. Discover one practical next step,
-        learn a new skill, or make another person's day a little better.
-      </p>
-      <button onclick="showIdea()">Give me one good thing</button>
-      <div class="result" id="idea" aria-live="polite">
-        Your next small act of kindness starts here.
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Where would you like to begin?</h2>
-      <div class="grid">
-        <article class="card">
-          <div class="symbol">💜</div>
-          <h3>I Need Help</h3>
-          <p>Find a safe, practical first step when something feels difficult.</p>
-          <button onclick="choose('help')">Find a next step</button>
-        </article>
-
-        <article class="card">
-          <div class="symbol">🤝</div>
-          <h3>I Can Help</h3>
-          <p>Discover simple ways to support people in your community.</p>
-          <button onclick="choose('give')">Find a way to help</button>
-        </article>
-
-        <article class="card">
-          <div class="symbol">📚</div>
-          <h3>Learn for Free</h3>
-          <p>Take a step toward learning a useful skill with free resources.</p>
-          <button onclick="choose('learn')">Start learning</button>
-        </article>
-      </div>
-
-      <div class="result" id="answer" aria-live="polite">
-        Choose a card to discover your next step.
-      </div>
-      <p class="note">
-        SmallBridge is a starting point, not an emergency service.
-        Don't post passwords, private addresses, or sensitive personal details.
-        If you're in immediate danger, contact a trusted adult or local
-        emergency services.
+        Discover learning resources, public services, community support,
+        and practical ways to make a difference.
       </p>
     </section>
+
+    <div class="wrap">
+      <section class="section" aria-labelledby="directoryHeading">
+        <div class="search-panel">
+          <h2 id="directoryHeading">What are you looking for?</h2>
+          <p class="muted">Search by topic or choose a category below.</p>
+
+          <div class="search-grid">
+            <div>
+              <label for="search">Search resources</label>
+              <input id="search" type="search"
+                placeholder="Try learning, jobs, food, government..."
+                autocomplete="off">
+            </div>
+
+            <div>
+              <label for="categorySelect">Category</label>
+              <select id="categorySelect">
+                <option value="all">All categories</option>
+                <option value="learning">Learning</option>
+                <option value="work">Skills and work</option>
+                <option value="government">Public services</option>
+                <option value="community">Community support</option>
+                <option value="safety">Safety</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="filters" aria-label="Quick category filters">
+          <button class="filter active" data-category="all" aria-pressed="true">All</button>
+          <button class="filter" data-category="learning" aria-pressed="false">📚 Learning</button>
+          <button class="filter" data-category="work" aria-pressed="false">💻 Skills & work</button>
+          <button class="filter" data-category="government" aria-pressed="false">🏛️ Public services</button>
+          <button class="filter" data-category="community" aria-pressed="false">🤝 Community</button>
+          <button class="filter" data-category="safety" aria-pressed="false">🛟 Safety</button>
+        </div>
+
+        <p class="results-line" id="resultCount" aria-live="polite"></p>
+        <div class="cards" id="resourceList"></div>
+        <div class="empty" id="emptyState" hidden>
+          No matching resources found. Try another word or category.
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="communityHeading">
+        <h2 id="communityHeading">Community support</h2>
+        <p class="muted">
+          Looking for food, essential items, or help in your area?
+        </p>
+
+        <div class="notice">
+          <strong>Start with a trusted local organization.</strong>
+          <p>
+            Contact the Kenya Red Cross or a recognized community organization
+            to ask what support or referrals may currently be available.
+            Assistance depends on location, eligibility, and current resources.
+          </p>
+          <p>
+            <a href="https://www.redcross.or.ke/"
+               target="_blank" rel="noopener noreferrer">
+              Visit Kenya Red Cross website ↗
+            </a>
+          </p>
+        </div>
+
+        <div class="notice">
+          <strong>Need help accessing government services?</strong>
+          <p>
+            Huduma Centres provide in-person assistance with government
+            services. Check official information before visiting.
+          </p>
+          <p>
+            <a href="https://www.icta.go.ke/citizens"
+               target="_blank" rel="noopener noreferrer">
+              Explore Kenya citizen services ↗
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="kindnessHeading">
+        <div class="kindness">
+          <div class="eyebrow">ONE GOOD THING</div>
+          <h2 id="kindnessHeading">Make someone's day better.</h2>
+          <p id="kindnessIdea" aria-live="polite">
+            Discover one small act of kindness you can do today.
+          </p>
+          <button class="primary" id="newIdea">Give me an idea</button>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="safetyHeading">
+        <h2 id="safetyHeading">Your safety matters</h2>
+        <div class="notice">
+          <strong>Immediate danger in Kenya?</strong>
+          <p>
+            Call 999 or 112 for emergency assistance.
+            SmallBridge is a directory, not an emergency response service.
+          </p>
+          <p>
+            <a href="tel:999">Call 999</a> ·
+            <a href="tel:112">Call 112</a>
+          </p>
+        </div>
+
+        <p class="muted">
+          Protect your privacy. Never publish passwords, identity numbers,
+          bank details, exact home addresses, or private information about
+          another person. Beware of anyone demanding money to promise a job,
+          grant, or assistance. Verify offers through official sources.
+        </p>
+      </section>
+    </div>
   </main>
 
   <footer>
     <p><strong>SmallBridge</strong> — Small actions. Stronger communities.</p>
-    <p>Built to make kindness practical.</p>
+    <p>
+      Resources may change. Confirm current availability, fees, eligibility,
+      and service details directly with each provider.
+    </p>
+    <p>Built with care. Free to explore.</p>
   </footer>
 
   <script>
-    const ideas = [
-      "Check on someone you trust and ask how their day is going.",
-      "Share a useful lesson or skill with someone who wants to learn.",
-      "Help with a small task at home without being asked.",
-      "Encourage someone who is learning something new.",
-      "Find a community project where you can volunteer safely.",
-      "Thank someone who has helped you recently."
+    const resources = [
+      {
+        name: "Khan Academy",
+        category: "learning",
+        icon: "📚",
+        tag: "Free learning",
+        description: "Practise maths, science, computing, and other subjects at your own pace.",
+        url: "https://www.khanacademy.org/",
+        terms: "school students study lessons education"
+      },
+      {
+        name: "Ajira Digital",
+        category: "work",
+        icon: "💻",
+        tag: "Digital skills",
+        description: "Explore digital-work training, learning opportunities, and programme information in Kenya.",
+        url: "https://www.ajiradigital.go.ke/",
+        terms: "online work training jobs kenya youth"
+      },
+      {
+        name: "ICT Authority — Citizen Services",
+        category: "government",
+        icon: "🏛️",
+        tag: "Public information",
+        description: "Learn about Kenyan e-government services, Huduma Centres, and digital access initiatives.",
+        url: "https://www.icta.go.ke/citizens",
+        terms: "government huduma public services kenya"
+      },
+      {
+        name: "Kenya Red Cross",
+        category: "community",
+        icon: "🤝",
+        tag: "Humanitarian support",
+        description: "Contact a recognized humanitarian organization to ask about current assistance and referrals.",
+        url: "https://www.redcross.or.ke/",
+        terms: "food basic needs community emergency support"
+      },
+      {
+        name: "National Police Service",
+        category: "safety",
+        icon: "🛟",
+        tag: "Safety information",
+        description: "Find official police information. For immediate emergencies in Kenya, call 999 or 112.",
+        url: "https://www.nationalpolice.go.ke/",
+        terms: "police emergency safety kenya help"
+      },
+      {
+        name: "Khan Academy Computing",
+        category: "learning",
+        icon: "🧠",
+        tag: "Build knowledge",
+        description: "Explore computing and other learning topics through free educational lessons.",
+        url: "https://www.khanacademy.org/computing",
+        terms: "coding computers technology programming learn"
+      },
+      {
+        name: "Ajira Training and Learning",
+        category: "work",
+        icon: "🚀",
+        tag: "Skills development",
+        description: "Check the official programme for available training, registration details, and opportunities.",
+        url: "https://www.ajiradigital.go.ke/",
+        terms: "digital skills freelancing career youth training"
+      },
+      {
+        name: "Kenya Open Data",
+        category: "government",
+        icon: "📊",
+        tag: "Public information",
+        description: "Explore public datasets that can help with research, projects, and understanding Kenya.",
+        url: "https://opendata.go.ke/",
+        terms: "data research government information projects"
+      }
     ];
 
-    function showIdea() {
-      const idea = ideas[Math.floor(Math.random() * ideas.length)];
-      document.getElementById("idea").textContent = idea;
+    const searchInput = document.getElementById("search");
+    const categorySelect = document.getElementById("categorySelect");
+    const resourceList = document.getElementById("resourceList");
+    const resultCount = document.getElementById("resultCount");
+    const emptyState = document.getElementById("emptyState");
+    const filterButtons = document.querySelectorAll(".filter");
+
+    let activeCategory = "all";
+
+    function renderResources() {
+      const query = searchInput.value.trim().toLowerCase();
+      const category = categorySelect.value;
+
+      const matches = resources.filter(resource => {
+        const matchesCategory =
+          category === "all" || resource.category === category;
+
+        const searchable = [
+          resource.name,
+          resource.description,
+          resource.tag,
+          resource.terms,
+          resource.category
+        ].join(" ").toLowerCase();
+
+        return matchesCategory && searchable.includes(query);
+      });
+
+      resourceList.replaceChildren();
+
+      matches.forEach(resource => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const icon = document.createElement("div");
+        icon.className = "icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = resource.icon;
+
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = resource.tag;
+
+        const heading = document.createElement("h3");
+        heading.textContent = resource.name;
+
+        const description = document.createElement("p");
+        description.textContent = resource.description;
+
+        const link = document.createElement("a");
+        link.href = resource.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Visit resource ↗";
+        link.setAttribute("aria-label", "Visit " + resource.name);
+
+        card.append(icon, tag, heading, description, link);
+        resourceList.append(card);
+      });
+
+      resultCount.textContent =
+        matches.length + (matches.length === 1 ? " resource found" : " resources found");
+
+      emptyState.hidden = matches.length !== 0;
     }
 
-    function choose(type) {
-      const messages = {
-        help: "Start by naming the problem in general terms. Break it into one manageable step, and consider speaking with a trusted person or a qualified local support service.",
-        give: "Choose one safe action: share a useful skill, help with a task, donate an item you no longer need, or volunteer through a trusted community group.",
-        learn: "Pick one skill you want to learn. Search for a free beginner course, set aside 15 minutes, and practise one small lesson today."
-      };
+    function setCategory(category) {
+      activeCategory = category;
+      categorySelect.value = category;
 
-      document.getElementById("answer").textContent = messages[type];
+      filterButtons.forEach(button => {
+        const selected = button.dataset.category === category;
+        button.classList.toggle("active", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+
+      renderResources();
     }
+
+    searchInput.addEventListener("input", renderResources);
+
+    categorySelect.addEventListener("change", () => {
+      setCategory(categorySelect.value);
+    });
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        setCategory(button.dataset.category);
+      });
+    });
+
+    const kindnessIdeas = [
+      "Teach someone a skill you know, even if it takes only ten minutes.",
+      "Encourage a learner who feels unsure about their progress.",
+      "Help someone find a trustworthy free learning resource.",
+      "Offer to help with a small, safe task at home or in your community.",
+      "Thank someone who has made a positive difference in your life.",
+      "Share useful public information without sharing anyone's private details.",
+      "Ask a trusted community group whether it needs volunteers."
+    ];
+
+    document.getElementById("newIdea").addEventListener("click", () => {
+      const index = Math.floor(Math.random() * kindnessIdeas.length);
+      document.getElementById("kindnessIdea").textContent = kindnessIdeas[index];
+    });
+
+    renderResources();
   </script>
 </body>
-        </html>
-        
+</html>
